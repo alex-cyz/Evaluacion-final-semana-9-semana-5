@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>Gestión de Ventas</h2>
+  
+  <button (click)="abrirFormulario()" class="btn btn-primary">+ Nueva Venta</button>
+
+  <div *ngIf="mostrarFormulario" class="formulario">
+    <h3>Nueva Venta</h3>
+    <form (ngSubmit)="guardarVenta()">
+      <select [(ngModel)]="nuevaVenta.idCliente" name="cliente" required>
+        <option value="">Selecciona un Cliente</option>
+        <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">
+          {{ cliente.nombre }} {{ cliente.apellido }}
+        </option>
+      </select>
+      
+      <input [(ngModel)]="nuevaVenta.total" name="total" type="number" step="0.01" placeholder="Total" required>
+      
+      <select [(ngModel)]="nuevaVenta.estado" name="estado">
+        <option>Completada</option>
+        <option>Pendiente</option>
+        <option>Cancelada</option>
+      </select>
+      
+      <div class="btn-group">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" (click)="resetFormulario()" class="btn btn-secondary">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas">
+        <td>{{ venta.idVenta }}</td>
+        <td>{{ venta.cliente?.nombre }} {{ venta.cliente?.apellido }}</td>
+        <td>{{ venta.fechaVenta | date: 'short' }}</td>
+        <td>\${{ venta.total.toFixed(2) }}</td>
+        <td>{{ venta.estado }}</td>
+        <td>
+          <button (click)="eliminarVenta(venta.idVenta)" class="btn btn-small btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="ventas.length === 0" class="sin-datos">No hay ventas registradas</p>
+</div>

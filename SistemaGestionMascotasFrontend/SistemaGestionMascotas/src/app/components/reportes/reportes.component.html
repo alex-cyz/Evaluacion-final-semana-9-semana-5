@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Reportes - Productos Vendidos por Categoría</h2>
+  
+  <div *ngIf="cargando" class="cargando">
+    <p>Cargando reporte...</p>
+  </div>
+
+  <div *ngIf="!cargando && reportes.length > 0" class="reporte">
+    <div class="resumen">
+      <div class="tarjeta">
+        <h3>Total General de Ventas</h3>
+        <p class="valor">\${{ calcularTotalGeneral().toFixed(2) }}</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Productos Vendidos</h3>
+        <p class="valor">{{ calcularProductosTotalVendidos() }}</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Categorías</h3>
+        <p class="valor">{{ reportes.length }}</p>
+      </div>
+    </div>
+
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Productos Vendidos</th>
+          <th>Total Ventas</th>
+          <th>Transacciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reporte of reportes">
+          <td><strong>{{ reporte.categoria }}</strong></td>
+          <td>{{ reporte.totalProductosVendidos }}</td>
+          <td>\${{ reporte.totalVentas.toFixed(2) }}</td>
+          <td>{{ reporte.cantidadTransacciones }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!cargando && reportes.length === 0" class="sin-datos">
+    <p>No hay datos disponibles para mostrar</p>
+  </div>
+</div>
