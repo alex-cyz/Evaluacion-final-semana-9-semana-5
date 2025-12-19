@@ -7,7 +7,7 @@ import { Mascota } from '../models/mascota.model';
   providedIn: 'root'
 })
 export class MascotaService {
-  private apiUrl = 'https://localhost:7121/api/mascotas';
+  private apiUrl = 'http://localhost:5285/api/mascotas';
 
   constructor(private http: HttpClient) { }
 

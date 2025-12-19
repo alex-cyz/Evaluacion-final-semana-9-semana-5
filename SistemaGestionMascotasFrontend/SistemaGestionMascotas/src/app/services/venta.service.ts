@@ -14,7 +14,7 @@ export interface ReporteVentas {
   providedIn: 'root'
 })
 export class VentaService {
-  private apiUrl = 'https://localhost:7121/api/ventas';
+  private apiUrl = 'http://localhost:5285/api/ventas';
 
   constructor(private http: HttpClient) { }
 
